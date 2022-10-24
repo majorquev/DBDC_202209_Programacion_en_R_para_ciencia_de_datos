@@ -1,0 +1,6 @@
+?pnorm
+
+
+
+options(digits = 3)
+1-pbinom(29, size = 100, prob = 0.2)

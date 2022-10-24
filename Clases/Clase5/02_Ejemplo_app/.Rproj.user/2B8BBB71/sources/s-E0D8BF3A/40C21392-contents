@@ -1,0 +1,60 @@
+library(arules)
+?transactions
+
+## example 1: creating transactions form a list
+a_list <- list(
+  c("a","b","c"),
+  c("a","b"),
+  c("a","b","d"),
+  c("c","e"),
+  c("a","b","d","e")
+)
+
+## set transaction names
+names(a_list) <- paste("Tr",c(1:5), sep = "")
+a_list
+
+## coerce into transactions
+trans1 <- as(a_list, "transactions")
+
+## analyze transactions
+summary(trans1)
+image(trans1)
+
+## example 2: creating transactions from a matrix
+a_matrix <- matrix(c(
+  1,1,1,0,0,
+  1,1,0,0,0,
+  1,1,0,1,0,
+  0,0,1,0,1,
+  1,1,0,1,1
+), ncol = 5)
+
+## set dim names
+dimnames(a_matrix) <- list(c("a","b","c","d","e"),
+                           paste("Tr",c(1:5), sep = ""))
+
+a_matrix <- t(a_matrix)
+
+## coerce
+trans2 <- as(a_matrix, "transactions")
+trans2
+inspect(trans2)
+
+
+
+## example 4: creating transactions from a data.frame with 
+## transaction IDs and items (by converting it into a list of transactions first) 
+a_df3 <- data.frame(
+  TID = c(1,1,2,2,2,3), 
+  item=c("a","b","a","b","c", "b")
+)
+
+a_df3
+
+df_to_list <- split(a_df3[,"item"], a_df3[,"TID"])
+
+trans4 <- as(df_to_list, "transactions")
+trans4
+inspect(trans4)
+

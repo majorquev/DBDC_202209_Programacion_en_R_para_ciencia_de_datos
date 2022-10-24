@@ -1,0 +1,26 @@
+x <- 30*rbeta(250,1,1)
+y <- 10000000*exp(-(x+rnorm(50,sd = 8)))
+
+
+plot(x,log(y))
+plot(x,y)
+
+library(ggplot2)
+library(dplyr)
+# install.packages("scales")
+library(scales)
+
+A <- data.frame(x = x, y= y)
+
+  A %>%
+  ggplot() +
+  aes(x = x,y = y) + 
+  geom_point(alpha = 0.3) + 
+    labs(x = "Log(Tasa de interés)",
+         title = "Relación tasa vs crédito",
+         subtitle = "Ejemplo ficticio",
+         y = "Monto") +
+    scale_y_log10(labels =  comma_format(big.mark = ".",
+                                         decimal.mark = ",") )
+
+                  

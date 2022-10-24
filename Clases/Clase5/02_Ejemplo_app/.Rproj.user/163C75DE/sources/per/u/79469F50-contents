@@ -1,0 +1,23 @@
+library(arules)
+install.packages("arules")
+
+?transactions
+paste("Tr", c(1:5), sep = "")
+
+
+a_matrix <- matrix(
+  c(1, 1, 1, 0, 0,
+    1, 1, 0, 0, 0,
+    1, 1, 0, 1, 0,
+    0, 0, 1, 0, 1,
+    1, 1, 0, 1, 1), ncol = 5)
+
+a_matrix <- t(a_matrix)
+
+a_matrix
+
+## Set item names (columns) and transaction labels (rows)
+colnames(a_matrix) <- c("a", "b", "c", "d", "e")
+rownames(a_matrix) <- paste("Tr", c(1:5), sep = "")
+
+a_matrix
